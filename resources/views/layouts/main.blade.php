@@ -9,8 +9,10 @@
 
   <title>@yield('title')</title>
   <!-- bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-  <!-- loader-->
+ 
+ <link href="{{ asset('template/assets/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css') }}" rel="stylesheet"/>
+ 
+ <!-- loader-->
   <link href="{{ asset('template/assets/css/pace.min.css') }}" rel="stylesheet"/>
   <script src="{{ asset('template/assets/js/pace.min.js') }}"></script>
   <!--favicon-->
@@ -31,7 +33,7 @@
   <link href="{{ asset('template/assets/css/app-style.css') }}" rel="stylesheet"/>
 
 
-  
+ 
 </head>
 
 <body class="bg-theme bg-theme1">
@@ -42,7 +44,7 @@
   <!--Start sidebar-wrapper-->
    <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true" >
      <div class="brand-logo">
-      <a href="/">
+      <a href="/dashboard">
        <img src="{{ asset('template/assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
        <h5 class="logo-text">School Reading System</h5>
      </a>
@@ -52,28 +54,37 @@
   
       
       <li>
-        <a href="/">
+        <a href="/dashboard">
           <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/datasekolah">
+          @if(auth()->user()->role == 'admin')
+          <i class="zmdi zmdi-assignment-account"></i> <span>Data Daftar Sekolah</span>
+          @endif
         </a>
       </li>
 
       <li class="nav-item srs">
         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"> 
-        <i class="zmdi zmdi-view-dashboard"></i> <i class="fa fa-angle-right pull-right"></i> <span>SRS</span></a>
+        <i class="zmdi zmdi-book-image"></i> <i class="fa fa-angle-right pull-right"></i> <span>SRS</span></a>
           <ul class="dropdown-menu dropdown-menu-right">
             <a href="/dataguru"><li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Progres Guru</li></a>
-            <a href="/datasiswa"><li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Progres Siswa</li></a>
+            <a href="/guru"><li class="dropdown-item"> <i class="zmdi zmdi-account-circle"></i> Guru</li></a>
+            <a href="/datasiswa"><li class="dropdown-item"> <i class="zmdi zmdi-account"></i> Progres Siswa</li></a>
             <a href="/"><li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Pembayaran</li></a>
           </ul>
       </li>
 
       <li class="nav-item srs">
         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"> 
-        <i class="zmdi zmdi-view-dashboard"></i> <i class="fa fa-angle-right pull-right"></i> <span>Pelatihan Guru</span></a>
+        <i class="zmdi zmdi-assignment"></i> <i class="fa fa-angle-right pull-right"></i> <span>Pelatihan Guru</span></a>
           <ul class="dropdown-menu dropdown-menu-right">
             <a href="/dataguru"><li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Pelatihan A</li></a>
             <a href="/datasiswa"><li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Pelatihan B</li></a>
-            <a href="/"><li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Pelatihan C</li></a>
+            <a href="/dashboard"><li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Pelatihan C</li></a>
           </ul>
       </li>
 
@@ -85,13 +96,6 @@
         </a>
       </li>
 
-      <li>
-        <a href="login.html" target="_blank">
-          <i class="zmdi zmdi-lock"></i> <span>Login</span>
-        </a>
-      </li>
-
-     
 
     </ul>
    </div>
@@ -123,14 +127,7 @@
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
       <i class="fa fa-bell-o"></i></a>
     </li>
-    <li class="nav-item language">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"><i class="fa fa-flag"></i></a>
-      <ul class="dropdown-menu dropdown-menu-right">
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> Pelatihan A</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> Pelatihan B</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Pelatihan C</li>
-        </ul>
-    </li>
+  
     <li class="nav-item">
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
         <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
@@ -141,20 +138,15 @@
            <div class="media">
              <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
             <div class="media-body">
-            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-            <p class="user-subtitle">mccoy@example.com</p>
+            <h6 class="mt-2 user-title">{{auth()->user()->name}}</h6>
+            <p class="user-subtitle">{{auth()->user()->email}}</p>
             </div>
            </div>
           </a>
         </li>
+
         <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+        <li class="dropdown-item"><i class="icon-power mr-2"><a href="/logout"> Logout</i></a></li>
       </ul>
     </li>
   </ul>
@@ -167,7 +159,8 @@
 <div class="clearfix"></div>
 	
 <div class="content-wrapper">
- 
+    <!-- Modal -->
+   
     @yield('content')	
  
 </div>
@@ -185,15 +178,16 @@
     <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
     <!--End Back To Top Button-->
 	
-	<!--Start footer-->
+	
+    <!--Start footer-->
 	<footer class="footer">
-      <div class="container">
-        <div class="text-center">
-          Copyright © 2021 NFC
-        </div>
+    <div class="container">
+      <div class="text-center">
+        Copyright © 2021 NFC
       </div>
-    </footer>
-	<!--End footer-->
+    </div>
+  </footer>
+<!--End footer-->
 	
   <!--start color switcher-->
    <div class="right-sidebar">
@@ -252,28 +246,17 @@
   <script src="{{ asset('template/assets/plugins/Chart.js/Chart.min.js') }}"></script>
 
  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-
-
  
-  <!-- Index js -->
-  <script src="{{ asset('template/assets/js/index.js') }}"></script>
+   <script src="{{ asset('template/assets/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js') }}"></script>
+   
+    <!-- Index js -->
+    <script src="{{ asset('template/assets/js/index.js') }}"></script>
 
-
-
-
- 
 
 
   <!-- Chart js -->
 
 @yield('chart')
   
-
- 
-
-   
-
-
 </body>
 </html>

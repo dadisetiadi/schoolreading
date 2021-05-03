@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataguruTable extends Migration
+class CreateLevelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateDataguruTable extends Migration
      */
     public function up()
     {
-        Schema::create('dataguru', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nama_guru');
-            $table->string('jumlah_buku');
-            $table->string('jumlah_artikel');
-            $table->char('total_point',100);
+        Schema::create('levels', function (Blueprint $table) {
+            $table->bigIncrements('id_level');
+            $table->string('level');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateDataguruTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dataguru');
+        Schema::dropIfExists('levels');
     }
 }

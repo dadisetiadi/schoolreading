@@ -1,19 +1,5 @@
 
 
-    <?php
-     
-    $dataPoints = array(
-    	array("y" => $guru->total_jumlah_buku(), "label" => "Sunday"),
-    	array("y" => $guru->total_jumlah_buku(), "label" => "Monday"),
-    	array("y" => $guru->total_jumlah_buku(), "label" => "Tuesday"),
-    	array("y" => $guru->total_jumlah_buku(), "label" => "Wednesday"),
-    	array("y" => $guru->total_jumlah_buku(), "label" => "Thursday"),
-    	array("y" => $dataguru->total_jumlah_buku(), "label" => "Friday"),
-    	array("y" => $dataguru->total_jumlah_buku(), "label" => "Saturday")
-    );
-     
-    ?>
-
 
 @extends('layouts.main')
 
@@ -21,7 +7,58 @@
     
 @section('content')
 
+<div class="container-fluid">    
+<div class="row mt-3">
+<div class="col-md-5">
+  
+        <form id="Myform1">
+          <div class="row form-group">
 
+              <div class="col-md-5">
+              <select class="form-control " name="sekolah">
+                          
+                          <option value="#" selected="">Pilih Sekolah</option>
+                          <option value="1">SD</option>
+                          <option value="2">SMP</option>
+                          <option value="3">SMA</option>
+                  
+              </select>
+              </div>
+
+          </div>
+        </form>
+        <input type="submit" class="" name="submit2"  value="Tampilkan">
+
+</div>      
+</div>
+</div>
+
+
+<div class="container-fluid">    
+<div class="row mt-3">
+<div class="col-md-5">
+    
+          <form id="Myform1">
+            <div class="row form-group">
+  
+                <div class="col-md-5">
+                <select class="form-control " name="sekolah">
+                            
+                            <option value="#" selected="">Pilih Sekolah</option>
+                            <option value="1">SD</option>
+                            <option value="2">SMP</option>
+                            <option value="3">SMA</option>
+                    
+                </select>
+                </div>
+  
+            </div>
+          </form>
+          <input type="submit" class="" name="submit2"  value="Tampilkan">
+  
+  </div>      
+  </div>
+  </div>
  
     <div class="container-fluid">    
       <div class="row mt-3">
@@ -44,14 +81,14 @@
                   </thead>
 
                   <tbody>
-                   @foreach ($siswa as $dataguru)
+                   @foreach ($siswa as $datasiswa)
                     <tr>
                       <th scope="row">{{ $loop->iteration}}</th>
-                      <td>{{ $dataguru->nama_guru}}</td>
-                      <td>{{ $dataguru->jumlah_buku}}</td>
-                      <td>{{ $dataguru->jumlah_artikel}}</td>
-                      <td>{{ $dataguru->total_point}}</td>
-                      <td>{{ $dataguru->kelas}}</td>
+                      <td>{{ $datasiswa->nama_guru}}</td>
+                      <td>{{ $datasiswa->jumlah_buku}}</td>
+                      <td>{{ $datasiswa->jumlah_artikel}}</td>
+                      <td>{{ $datasiswa->total_point}}</td>
+                      <td>{{ $datasiswa->kelas}}</td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -77,27 +114,7 @@
         </div>
         </div>
         
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-       <script>
-          window.onload = function () {
-           
-          var chart = new CanvasJS.Chart("chartContainer", {
-            title: {
-              text: "Grafik Point"
-            },
-            axisY: {
-              title: "Point"
-            },
-            data: [{
-              type: "line",
-              dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-            }]
-          });
-          chart.render();
-           
-          }
-        </script>
+       
         @endsection
 
       

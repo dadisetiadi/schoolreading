@@ -6,14 +6,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Teacher;
 use App\School;
+use App\Level;
 
-class DataguruController extends Controller
+class GuruController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //return view('Guru.guru');
 
-   
-      public function guru()
-      {
-       // $ibu =  Teacher::all();
+
         $gurufeb = Teacher::whereMonth('created_at', '02')->get();
         $gurumaret = Teacher::whereMonth('created_at', '03')->get();
         $guruapril = Teacher::whereMonth('created_at', '04')->get();
@@ -65,7 +71,10 @@ class DataguruController extends Controller
         }
       //   dd($cikgu);
         
-        return view('SRS.dataguru',['Monthsbuku'=>$monthbuku, 'Databuku'=>$databuku,
+      $level = Level::all();
+   
+
+        return view('Guru.guru',['Monthsbuku'=>$monthbuku, 'Databuku'=>$databuku,
         'Monthsartikel'=>$monthartikel, 'Dataartikel'=>$dataartikel,
         'Monthspoint'=>$monthpoint, 'Datapoint'=>$datapoint],
         
@@ -73,32 +82,72 @@ class DataguruController extends Controller
         'gurufeb','gurumaret','guruapril','gurumei',
         'bukutotal','bukufeb','bukumaret','bukuapril','bukumei',
         'artikeltotal','artikelfeb','artikelmaret','artikelapril','artikelmei',
-        'pointtotal','pointfeb','pointmaret','pointapril','pointmei'));
-       }
-
-    
-       public function panggil()
-       {
-       $sekolah = School::all();
-  
-       return view('#exampleModal', compact('sekolah'));
-       }
- 
-       public function create(Request $request)
-       {
-            
-           $teacher = new \App\Teacher;
-     
-           $teacher->nama_guru = $request->nama_guru;
-           $teacher->jumlah_buku = $request->jumlah_buku;
-           $teacher->jumlah_artikel = $request->jumlah_artikel;
-           $teacher->total_point = $request->total_point;
-
-           $teacher->save();
-   
-        
-           return redirect('/dataguru');
-           
+        'pointtotal','pointfeb','pointmaret','pointapril','pointmei', 'level'));
        }
     
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('Guru.create-guru');
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}

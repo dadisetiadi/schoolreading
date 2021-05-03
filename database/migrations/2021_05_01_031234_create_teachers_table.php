@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSmpStudentsTable extends Migration
+class CreateTeachersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSmpStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('smp_students', function (Blueprint $table) {
-            $table->bigIncrements('id_siswa');
-            $table->string('nama_siswa');
-            $table->string('jumlah_buku');
+        Schema::create('teachers', function (Blueprint $table) {
+            $table->bigIncrements('id_guru');
+            $table->string('nama_guru');
+            $table->string('jumlah_buku')->unique();
             $table->string('jumlah_artikel');
-            $table->char('total_point',100);
-            $table->enum('kelas', ['7', '8','9'])->default('7');
+            $table->string('total_point');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateSmpStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('smp_students');
+        Schema::dropIfExists('teachers');
     }
 }

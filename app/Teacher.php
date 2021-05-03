@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-    //
-    public function total_jumlah_buku(){
-        return $this->sum('jumlah_buku');
+    protected $table = 'teachers';
+    protected $primary_key = 'id_guru';
+    protected $fillable = ['id_guru', 'sekolah_id', 'nama_guru', 'jumlah_buku', 'jumlah_artikel','total_point'];
+
+    public function School()
+    {
+        return $this->belongsTo(School::class);
     }
 
-    public function total_jumlah_artikel(){
-        return $this->sum('jumlah_artikel');
-    }
 
-    public function total_jumlah_point(){
-        return $this->sum('total_point');
-    }
 }
