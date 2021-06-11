@@ -56,9 +56,6 @@ class SekolahController extends Controller
 
         $request->request->add(['user_id' => $user->id ]);
         $sekolah = \App\School::create($request->all());
-        
-        
-
 
         return redirect('datasekolah');
 

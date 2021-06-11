@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Teacher;
 use App\School;
+use App\Level;
+
 
 class DataguruController extends Controller
 {
@@ -65,6 +67,8 @@ class DataguruController extends Controller
         }
       //   dd($cikgu);
         
+        $level = Level::all();
+
         return view('SRS.dataguru',['Monthsbuku'=>$monthbuku, 'Databuku'=>$databuku,
         'Monthsartikel'=>$monthartikel, 'Dataartikel'=>$dataartikel,
         'Monthspoint'=>$monthpoint, 'Datapoint'=>$datapoint],
@@ -73,7 +77,7 @@ class DataguruController extends Controller
         'gurufeb','gurumaret','guruapril','gurumei',
         'bukutotal','bukufeb','bukumaret','bukuapril','bukumei',
         'artikeltotal','artikelfeb','artikelmaret','artikelapril','artikelmei',
-        'pointtotal','pointfeb','pointmaret','pointapril','pointmei'));
+        'pointtotal','pointfeb','pointmaret','pointapril','pointmei','level'));
        }
 
     
@@ -101,4 +105,5 @@ class DataguruController extends Controller
            
        }
     
+      
     }

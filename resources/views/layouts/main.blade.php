@@ -59,12 +59,16 @@
         </a>
       </li>
 
-      <li>
-        <a href="/datasekolah">
-          @if(auth()->user()->role == 'admin')
-          <i class="zmdi zmdi-assignment-account"></i> <span>Data Daftar Sekolah</span>
+      <li class="nav-item data-master">
+        @if(auth()->user()->role == 'admin')
+        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"> 
+        <i class="zmdi zmdi-book-image"></i> <i class="fa fa-angle-right pull-right"></i> <span>Data Master</span></a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <a href="/datasekolah"><li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Data Sekolah</li></a>
+            <a href="/guru"><li class="dropdown-item"> <i class="zmdi zmdi-account-circle"></i>Data Guru</li></a>
+            <a href="/datasiswa"><li class="dropdown-item"> <i class="zmdi zmdi-account"></i> Data Siswa</li></a>
+          </ul>
           @endif
-        </a>
       </li>
 
       <li class="nav-item srs">
@@ -78,7 +82,7 @@
           </ul>
       </li>
 
-      <li class="nav-item srs">
+      <li class="nav-item peatihan-guru">
         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"> 
         <i class="zmdi zmdi-assignment"></i> <i class="fa fa-angle-right pull-right"></i> <span>Pelatihan Guru</span></a>
           <ul class="dropdown-menu dropdown-menu-right">

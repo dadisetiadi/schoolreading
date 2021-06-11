@@ -17,72 +17,11 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //return view('Guru.guru');
-
-
-        $gurufeb = Teacher::whereMonth('created_at', '02')->get();
-        $gurumaret = Teacher::whereMonth('created_at', '03')->get();
-        $guruapril = Teacher::whereMonth('created_at', '04')->get();
-        $gurumei = Teacher::whereMonth('created_at', '05')->get();
-
-        $bukutotal = Teacher::sum('jumlah_buku');
-        $bukufeb = Teacher::whereMonth('created_at', '02')->sum('jumlah_buku');
-        $bukumaret = Teacher::whereMonth('created_at', '03')->sum('jumlah_buku');
-        $bukuapril = Teacher::whereMonth('created_at', '04')->sum('jumlah_buku');
-        $bukumei = Teacher::whereMonth('created_at', '05')->sum('jumlah_buku');
-   
-        $artikeltotal = Teacher::sum('jumlah_artikel');
-        $artikelfeb = Teacher::whereMonth('created_at', '02')->sum('jumlah_artikel');
-        $artikelmaret = Teacher::whereMonth('created_at', '03')->sum('jumlah_artikel');
-        $artikelapril = Teacher::whereMonth('created_at', '04')->sum('jumlah_artikel');
-        $artikelmei = Teacher::whereMonth('created_at', '05')->sum('jumlah_artikel');
-       
-        $pointtotal = Teacher::sum('total_point');
-        $pointfeb = Teacher::whereMonth('created_at', '02')->sum('total_point');
-        $pointmaret = Teacher::whereMonth('created_at', '03')->sum('total_point');
-        $pointapril = Teacher::whereMonth('created_at', '04')->sum('total_point');
-        $pointmei = Teacher::whereMonth('created_at', '05')->sum('total_point');
-
-
-        $monthbuku = array('Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des');
-        $databuku = array('',$bukufeb,$bukumaret, $bukuapril, $bukumei);
-      //  return view('SRS.dataguru',['Months'=>$month, 'Data'=>$data]);
-        $monthartikel = array('Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des');
-        $dataartikel = array('',$artikelfeb,$artikelmaret,$artikelapril );
-      
-        $monthpoint = array('Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des');
-        $datapoint = array('',$pointfeb,$pointmaret, $pointapril);
-
-        $jumlah_baca = [];
-        $jumlah_baca_artikel = [];
-        $jumlah_point = [];
-        $cikgu = [];
-        foreach($gurumaret as $row){
-            $cikgu[]= $row->created_at->isoFormat('MMMM');
-            
-            $jumlah = Teacher::whereMonth('created_at', '02')->sum('jumlah_buku');
-            $jumlah_baca[] =$jumlah;
-
-            $jumlah_atk = Teacher::sum('jumlah_artikel');
-            $jumlah_baca_artikel []= $jumlah_atk;
-
-            $jumlah_pt = Teacher::sum('total_point');
-            $jumlah_point []= $jumlah_pt;
-        }
-      //   dd($cikgu);
         
-      $level = Level::all();
-   
-
-        return view('Guru.guru',['Monthsbuku'=>$monthbuku, 'Databuku'=>$databuku,
-        'Monthsartikel'=>$monthartikel, 'Dataartikel'=>$dataartikel,
-        'Monthspoint'=>$monthpoint, 'Datapoint'=>$datapoint],
+        $level = Level::all();
+        return view('Guru.guru',[''],
         
-        compact('cikgu','jumlah_baca','jumlah_baca_artikel','jumlah_point',
-        'gurufeb','gurumaret','guruapril','gurumei',
-        'bukutotal','bukufeb','bukumaret','bukuapril','bukumei',
-        'artikeltotal','artikelfeb','artikelmaret','artikelapril','artikelmei',
-        'pointtotal','pointfeb','pointmaret','pointapril','pointmei', 'level'));
+        compact('level'));
        }
     
     /**
@@ -92,7 +31,8 @@ class GuruController extends Controller
      */
     public function create()
     {
-        return view('Guru.create-guru');
+        $sekolah = School::all();
+        return view('Guru.create-guru',compact('sekolah'));
     }
 
     /**
@@ -103,8 +43,10 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $guru = \App\Teacher::create($request->all());
+        return redirect('guru');
     }
+
 
     /**
      * Display the specified resource.

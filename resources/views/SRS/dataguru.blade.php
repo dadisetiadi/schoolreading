@@ -148,10 +148,7 @@
                  
                     <div class="col-12 col-lg-4">
                     <div class="p-3">
-                    <button data-interval="false" class="carousel-control-next-center" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
-                    <span class="carousel-control-next-icon-center" aria-hidden="true"></span>
-                    <span class="visually-hidden-center">Next</span>
-                    </button>
+                  
                     </div>
                     </div>
   
@@ -167,65 +164,48 @@
  
 
 
-    <div class="row mt-3">
-      <div class="col-md-5">
-        
-        <form action="" method="GET" class="form-group" id="formFilter">
-          {{ csrf_field() }}
+          <div class="basic-form">
+            <form class="form-inline" action="" method="GET" id="formFilter">
+              {{ csrf_field() }}
+                <select id="inputState" class="form-control mr-3">
+                  <option value="0" selected disabled> Pilih Jenjang</option>
+                  @foreach ($level as $item)
+                    <option value="{{$item->id_level}}">{{$item->level}}</option>
+                  @endforeach
+                </select>
 
-          <select style="cursor:pointer;" class="form-control" id="tag_select" name="year">
-          <option value="0" selected disabled> Pilih Tahun</option>
-            <?php 
-            $year = date('Y');
-            $min = $year - 10;
-            $max = $year;
-            for( $i=$max; $i>=$min; $i-- ) {
-            echo '<option value='.$i.'>'.$i.'</option>';
-            }
-            ?>
-          </select>
-        
-          <select style="cursor:pointer;margin-top:1.5em;margin-bottom:1.5em;" class="form-control" id="tag_select" name="month">
-          <option value="0" selected disabled> Pilih Bulan</option>
-          <option value="01"> Januari</option>
-          <option value="02"> Februari</option>
-          <option value="03"> Maret</option>
-          <option value="04"> April</option>
-          <option value="05"> Mei</option>
-          <option value="06"> Juni</option>
-          <option value="07"> Juli</option>
-          <option value="08"> Agustus</option>
-          <option value="09"> September</option>
-          <option value="10"> Oktober</option>
-          <option value="11"> November</option>
-          <option value="12"> Desember</option>
-        </select>
+                <select id="namasekolah" class="form-control mr-3">
+                    <option selected="selected">Pilih Bulan</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                </select>
 
-        <select style="cursor:pointer;" class="form-control" id="tag_select" name="year">
-          <option value="0" selected disabled> Pilih Sekolah</option>
-          <option value="01"> Januari</option>
-          <option value="02"> Februari</option>
-          <option value="03"> Maret</option>
-        </select>
-        </form>
-        <button class="btn btn-default btn-block" type="submit" form="formFilter" value="Submit">Cari Data</button>
-             
-      
-      </div>      
-      </div>
-      </div>    
-  
-    <!-- Tabel Bulan Februari -->
+                <select id="inputState" class="form-control mr-3">
+                  <option value="0" selected disabled> Pilih Tahun</option>
+                  <?php 
+                  $year = date('Y');
+                  $min = $year - 10;
+                  $max = $year;
+                  for( $i=$max; $i>=$min; $i-- ) {
+                  echo '<option value='.$i.'>'.$i.'</option>';
+                  }
+                  ?>
+                </select>
+            
+                <button type="submit" class="btn btn-dark mr-3">Filter</button>
+                <button href="{{route ('create-guru') }}" class="btn btn-success float float-right">Tambah Data Guru </button>
+               
+            </form>
+        </div>
    
 
         <div class="row mt-3">
         <div class="col-12 col-lg-12 col-xl-12">
         <div class="card">
         <div class="card-body">
-          <button href="/dataguru/create" type="submit" class="btn btn-success float-right" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Tambah Data
-          </button>
-        <h5 class="card-title">Progres Poin Membaca Guru Bulan Februari</h5>
+         
+        <h5 class="card-title">Progres Data Guru </h5>
         <br>
 			  <div class="table-responsive">
         <table class="table"> 
@@ -277,9 +257,6 @@
                       
                   </tfoot>  
                 </table>
-
-              
-          
           </div>
           </div>
           </div>
@@ -289,190 +266,7 @@
     <!-- Tabel Bulan Maret -->
    
   
-      <div class="row mt-3">
-      <div class="col-12 col-lg-12 col-xl-12">
-      <div class="card">
-      <div class="card-body">
-            
-      <h5 class="card-title">Progres Poin Membaca Guru Bulan Maret</h5>
-      <div class="table-responsive">
-      <table class="table"> 
-        <thead>
-          <tr>
-
-          <th scope="col">No</th>
-          <th scope="col">Nama Sekolah</th>
-          <th scope="col">Nama Guru</th>
-          <th scope="col">Jumlah Buku di Baca</th>
-          <th scope="col">Jumlah Artikel di Baca</th>
-          <th scope="col">Total Poin</th>
       
-          </tr>
-        </thead>
-        
-        <tbody>
-          @foreach ($gurumaret as $datamaret)
-                  <tr>
-                    <th scope="row">{{ $loop->iteration}}</th>
-                    <td>{{ $datamaret->School->nama_sekolah}}</td>
-                    <td>{{ $datamaret->nama_guru}}</td>
-                    <td>{{ $datamaret->jumlah_buku}}</td>
-                    <td>{{ $datamaret->jumlah_artikel}}</td>
-                    <td>{{ $datamaret->total_point}}</td>
-            
-                  </tr>
-                  @endforeach
-
-                </tbody>
-
-                <tfoot>
-                  <tr>
-                    <th></th>
-                    <th> 
-                      <b><i>Total</i></b>
-                    </th>
-
-                    <th> 
-                      <b><i>{{$bukumaret}}</i></b>
-                    </th>
-
-                    <th> 
-                      <b><i>{{$artikelmaret}}</i></b>
-                    </th>
-
-                    <th> 
-                      <b><i>{{$pointmaret}}</i></b>
-                    </th>
-
-              </tfoot>  
-              </table>
-              
-            
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-
-
-        <div class="row mt-3">
-          <div class="col-12 col-lg-12 col-xl-12">
-          <div class="card">
-          <div class="card-body">
-         
-          <h5 class="card-title">Progres Poin Membaca Guru Bulan April</h5>
-          <br>
-          <div class="table-responsive">
-          <table class="table"> 
-            <thead>
-              <tr>
-  
-              <th scope="col">No</th>
-              <th scope="col">Nama Guru</th>
-              <th scope="col">Jumlah Buku di Baca</th>
-              <th scope="col">Jumlah Artikel di Baca</th>
-              <th scope="col">Total Poin</th>
-            
-              </tr>
-            </thead>
-            
-            <tbody>
-              @foreach ($guruapril as $dataapril)
-                      <tr>
-                        <th scope="row">{{ $loop->iteration}}</th>
-                        <td>{{ $dataapril->nama_guru}}</td>
-                        <td>{{ $dataapril->jumlah_buku}}</td>
-                        <td>{{ $dataapril->jumlah_artikel}}</td>
-                        <td>{{ $dataapril->total_point}}</td>
-                    
-                
-                      </tr>
-                      @endforeach
-  
-                    </tbody>
-  
-                    <tfoot>
-                      <tr>
-                        <th></th>
-                        <th> 
-                          <b><i>Total</i></b>
-                        </th>
-  
-                        <th> 
-                          <b><i>{{$bukuapril}}</i></b>
-                        </th>
-  
-                        <th> 
-                          <b><i>{{$artikelapril}}</i></b>
-                        </th>
-  
-                        <th> 
-                          <b><i>{{$pointapril}}</i></b>
-                        </th>
-                        
-                    </tfoot>  
-                  </table>
-  
-                
-            
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-  
-
-
-        <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-muted" id="exampleModalLabel">Tambah Data Guru</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-     
-      <div class="modal-body text-muted">
-        <form action="/dataguru/create" method="POST">
-         @csrf
-
-          <div class="mb-3 text-muted">
-            <label class="form-label text-muted">Pilih Sekolah</label>
-            <select style="cursor:pointer;" class="form-control" id="tag_select" name="sekolah_id">
-              <option value="0" selected disabled> Pilih Sekolah</option>
-          
-            </select>
-          </div>
-
-          <div class="mb-3 text-muted">
-            <label for="exampleInputEmail1" class="form-label text-muted">Nama Guru</label>
-            <input name="nama_guru" type="text" class="form-text" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-
-          <div class="mb-3 text-muted">
-            <label for="exampleInputEmail1" class="form-label text-muted">Jumlah Buku</label>
-            <input name="jumlah_buku" type="text" class="form-text" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label text-muted">Jumlah Artikel </label>
-            <input name="jumlah_artikel" type="text" class="form-text" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label text-muted">Total Point </label>
-            <input name="total_point" type="text" class="form-text" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-        
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div>
 
      <!-- Script Grafik Total Buku -->
     <script>
@@ -656,7 +450,34 @@
 });
 </script>
        
-    @endsection
+
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script>
+    $(document).ready(function(){
+      $('#namasekolah').on('change', function(){
+        let id=$(this.val();
+        $('#namasekolah').empty();
+        $('#namasekolah')append('<option value="0" disabled selected> Processing........</option>),
+        $ajax({
+          type  : 'GET'
+          url   : 'filer/' + id,
+          success : function (response) {
+            var response = JSON.parse(response);
+            console.log(response);
+            $('#namasekolah').empty();
+            $('#namasekolah').append('<option value="0" disabled selected>Select Nama Sekolah"</option> );
+            response.forEach(Element => {
+              $('#namasekolah').append('<option vavlue ="$(element['id'])">$(element['name')</option>');
+
+            });
+          }
+      )};
+  
+</script>
+
+
+@endsection
 
 
 

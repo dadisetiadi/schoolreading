@@ -24,7 +24,7 @@ route::group(['middleware' => 'auth'], function() {
     Route::get('/dataguru', 'DataguruController@guru');
     Route::get('/dataguru/create', 'DataguruController@panggil');
     Route::post('/dataguru/create', 'DataguruController@create');
-
+    Route::get('/filter', 'DataguruController@filter');
 
     Route::get('/datasekolah', 'SekolahController@index');
     Route::get('/create-sekolah', 'SekolahController@create')->name('create-sekolah');
@@ -33,6 +33,9 @@ route::group(['middleware' => 'auth'], function() {
     Route::get('/guru', 'GuruController@index')->name('guru');
     Route::get('/create-guru', 'GuruController@create')->name('create-guru');
     Route::post('/simpan-guru', 'GuruController@store')->name('simpan-guru');
+    Route::post('/findSchoolName', 'GuruController@findSchoolName')->name('findSchoolName');
+
+    //Route::get('/filter', 'GuruController@filter')->name('filter');
 
   
   
